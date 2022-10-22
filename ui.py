@@ -6,10 +6,12 @@ root = Tk()
 root.title("Interfaz gráfica")
 root.resizable(0,0)
 root.config(bg = "white", cursor = "target")
-root.geometry("400x400")
+#root.geometry("400x400")
 
-
+#Interface constants
 fontSize = 8
+
+
 #Auxliar functions
 def changeAlgorithms(event):
     selected = event.widget.get()
@@ -25,26 +27,32 @@ def changeAlgorithms(event):
 #type of graph
 typeOfGraph_cb = Combobox(root)
 typeOfGraph_cb['values']=("Círculo","Línea")
-typeOfGraph_cb.place(x = 152, y = 12, width = 200, heigh = 20)
+#typeOfGraph_cb.place(x = 152, y = 12, width = 200, heigh = 20)
 typeOfGraph_cb.config(font = ("Arial",fontSize))
+
+
 
 #Algorithm
 algorithm_cb = Combobox(root)
-algorithm_cb.place(x = 152, y = 40, width = 200, heigh = 20)
+#algorithm_cb.place(x = 152, y = 40, width = 200, heigh = 20)
 algorithm_cb.config(font = ("Arial",fontSize))
 
 
 # Labels
 TypeOfGraph_label = Label(root, text = "Tipo de gráfica:",background="white")
-TypeOfGraph_label.place(x = 30, y = 10, width = 120, heigh = 20)
-TypeOfGraph_label.config(font = ("Arial",fontSize))
+#TypeOfGraph_label.place(x = 30, y = 10, width = 120, heigh = 20)
+TypeOfGraph_label.config(font = ("Arial",fontSize+4))
 
-TypeOfGraph_label = Label(root, text = "Algoritmo:",background="white")
-TypeOfGraph_label.place(x = 30, y = 40, width = 120, heigh = 20)
-TypeOfGraph_label.config(font = ("Arial",fontSize))
+TypeOfAlgorithm_label = Label(root, text = "Algoritmo:",background="white")
+#TypeOfGraph_label.place(x = 30, y = 40, width = 120, heigh = 20)
+TypeOfAlgorithm_label.config(font = ("Arial",fontSize+4))
 
 
-
+#Grid positions
+TypeOfGraph_label.grid(row=0,column=0,sticky=W,pady=2)
+TypeOfAlgorithm_label.grid(row=1,column=0,sticky=W,pady=2)
+typeOfGraph_cb.grid(row=0,column=1,sticky=W,pady=2)
+algorithm_cb.grid(row=1,column=1,sticky=W,pady=2)
 
 def callback(sel):
     print(sel)
