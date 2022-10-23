@@ -1,6 +1,9 @@
 from tkinter import*
 from tkinter.ttk import*
-from turtle import window_height, window_width
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.backends.backend_tkagg import (
+FigureCanvasTkAgg, NavigationToolbar2Tk)
 
 root = Tk()
 root.title("Interfaz gráfica")
@@ -27,25 +30,25 @@ def changeAlgorithms(event):
 #type of graph
 typeOfGraph_cb = Combobox(root)
 typeOfGraph_cb['values']=("Círculo","Línea")
-#typeOfGraph_cb.place(x = 152, y = 12, width = 200, heigh = 20)
 typeOfGraph_cb.config(font = ("Arial",fontSize))
-
 
 
 #Algorithm
 algorithm_cb = Combobox(root)
-#algorithm_cb.place(x = 152, y = 40, width = 200, heigh = 20)
 algorithm_cb.config(font = ("Arial",fontSize))
 
 
-# Labels
-TypeOfGraph_label = Label(root, text = "Tipo de gráfica:",background="white")
-#TypeOfGraph_label.place(x = 30, y = 10, width = 120, heigh = 20)
-TypeOfGraph_label.config(font = ("Arial",fontSize+4))
 
+# Labels
+#type of graph
+TypeOfGraph_label = Label(root, text = "Tipo de gráfica:",background="white")
+TypeOfGraph_label.config(font = ("Arial",fontSize+4))
+#Algorithm
 TypeOfAlgorithm_label = Label(root, text = "Algoritmo:",background="white")
-#TypeOfGraph_label.place(x = 30, y = 40, width = 120, heigh = 20)
 TypeOfAlgorithm_label.config(font = ("Arial",fontSize+4))
+#Details
+details_label = Label(root, text = "Detalles",background="white")
+details_label.config(font = ("Arial Black",fontSize+4))
 
 
 #Grid positions
@@ -53,9 +56,23 @@ TypeOfGraph_label.grid(row=0,column=0,sticky=W,pady=2)
 TypeOfAlgorithm_label.grid(row=1,column=0,sticky=W,pady=2)
 typeOfGraph_cb.grid(row=0,column=1,sticky=W,pady=2)
 algorithm_cb.grid(row=1,column=1,sticky=W,pady=2)
+details_label.grid(row=2,column=1,sticky="",pady=2)
+#graph.grid(row=3,column=1,sticky="",pady=2)
 
-def callback(sel):
-    print(sel)
+#NUMPY ELEMENTS
+list = np.array([1,2,3,4,5,6,7,8,9,10])
+fig = plt.figure(figsize=(4,5))
+plt.plot(list)
+#Graph
+canvas = FigureCanvasTkAgg(fig,master=root)
+canvas.draw()
+canvas.get_tk_widget().grid(row=3,column=1,sticky="",pady=2)
+#navigation
+toolbarFrame = Frame(master=root)
+toolbarFrame.grid(row=4,column=1,sticky="",pady=2)
+toolbar = NavigationToolbar2Tk(canvas, toolbarFrame)
+
+
 
 typeOfGraph_cb.current()
 typeOfGraph_cb.bind("<<ComboboxSelected>>",changeAlgorithms)
